@@ -132,20 +132,8 @@
 #define BABYLON_NAMESPACE_BEGIN namespace babylon {
 #define BABYLON_NAMESPACE_END }
 
-// 早期arena patch版本
-// - protobuf_3-2-1-8_PD_BL
-// - protobuf_3-2-1-9_PD_BL
-// - protobuf_3-10-1-20_PD_BL
-// 不支持c++17，禁用依赖protobuf的功能
-#if BABYLON_HAS_INCLUDE("google/protobuf/patch_std_string_for_arena.h")
-#include "google/protobuf/patch_std_string_for_arena.h"
-#if __cplusplus >= 201703L && \
-    (!defined(PROTOBUF_PATCH_STD_STRING) || PROTOBUF_PATCH_STD_STRING)
-#define BABYLON_USE_PROTOBUF 0
-#endif
-#endif
 #ifndef BABYLON_USE_PROTOBUF
-#define BABYLON_USE_PROTOBUF 1
+#define BABYLON_USE_PROTOBUF 0
 #endif
 
 #if BABYLON_HAS_INCLUDE(<version>)

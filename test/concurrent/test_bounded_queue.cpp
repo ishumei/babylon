@@ -1,5 +1,4 @@
 #include "babylon/concurrent/bounded_queue.h"
-#include "babylon/logging/interface.h" // BABYLON_LOG
 
 #include "gtest/gtest.h"
 
@@ -608,7 +607,6 @@ TEST(concurrent_bounded_queue, press_nonblocking_spsc) {
   for (auto& future : pop_futures) {
     pop_sum += future.get();
   }
-  BABYLON_LOG(INFO) << "push sum " << push_sum << " pop_sum " << pop_sum;
   ASSERT_EQ(push_sum, pop_sum);
 }
 
@@ -658,7 +656,6 @@ TEST(concurrent_bounded_queue, press_nonblocking_mpmc) {
   for (auto& future : pop_futures) {
     pop_sum += future.get();
   }
-  BABYLON_LOG(INFO) << "push sum " << push_sum << " pop_sum " << pop_sum;
   ASSERT_EQ(push_sum, pop_sum);
 }
 
