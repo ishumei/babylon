@@ -15,12 +15,6 @@ if(BUILD_DEPS)
     URL_HASH SHA256=81311c17599b3712069ded20cca09a62ab0bf2a89dfa16993786c8782b7ed145
   )
   FetchContent_Declare(
-    boost
-    URL "https://github.com/boostorg/boost/releases/download/boost-1.83.0/boost-1.83.0.tar.gz"
-    URL_HASH SHA256=0c6049764e80aa32754acd7d4f179fd5551d8172a83b71532ae093e7384e98da
-    EXCLUDE_FROM_ALL
-  )
-  FetchContent_Declare(
     googletest
     URL "https://github.com/google/googletest/archive/refs/tags/v1.14.0.tar.gz"
     URL_HASH SHA256=8ad598c73ad796e0d8280b082cebd82a630d73e73cd3c70057938a6501bba5d7
@@ -29,8 +23,7 @@ if(BUILD_DEPS)
     FetchContent_MakeAvailable(googletest)
   endif()
   set(ABSL_ENABLE_INSTALL ON)
-  set(BOOST_INCLUDE_LIBRARIES preprocessor spirit)
-  FetchContent_MakeAvailable(absl boost)
+  FetchContent_MakeAvailable(absl)
 endif()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/babylon-deps.cmake)
@@ -48,11 +41,6 @@ target_include_directories(babylon PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
   $<INSTALL_INTERFACE:include>)
 target_link_libraries(babylon absl::base absl::flat_hash_map absl::str_format)
-if(TARGET Boost::boost)
-  target_link_libraries(babylon Boost::boost)
-else()
-  target_link_libraries(babylon Boost::preprocessor Boost::spirit)
-endif()
 set_source_files_properties(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/babylon/reusable/message.trick.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/babylon/reusable/patch/arena.cpp"
