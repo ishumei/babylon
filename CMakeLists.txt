@@ -15,11 +15,6 @@ if(BUILD_DEPS)
     URL_HASH SHA256=81311c17599b3712069ded20cca09a62ab0bf2a89dfa16993786c8782b7ed145
   )
   FetchContent_Declare(
-    protobuf
-    URL "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v22.5.tar.gz"
-    URL_HASH SHA256=4b98c800b352e7582bc92ed398999030ce4ebb49c7858dcb070850ec476b72f2
-  )
-  FetchContent_Declare(
     boost
     URL "https://github.com/boostorg/boost/releases/download/boost-1.83.0/boost-1.83.0.tar.gz"
     URL_HASH SHA256=0c6049764e80aa32754acd7d4f179fd5551d8172a83b71532ae093e7384e98da
@@ -33,11 +28,9 @@ if(BUILD_DEPS)
   if(BUILD_TESTING AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     FetchContent_MakeAvailable(googletest)
   endif()
-  set(protobuf_BUILD_TESTS OFF)
   set(ABSL_ENABLE_INSTALL ON)
   set(BOOST_INCLUDE_LIBRARIES preprocessor spirit)
-  FetchContent_MakeAvailable(absl protobuf boost)
-  include("${protobuf_SOURCE_DIR}/cmake/protobuf-generate.cmake")
+  FetchContent_MakeAvailable(absl boost)
 endif()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/babylon-deps.cmake)
@@ -55,7 +48,6 @@ target_include_directories(babylon PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
   $<INSTALL_INTERFACE:include>)
 target_link_libraries(babylon absl::base absl::flat_hash_map absl::str_format)
-target_link_libraries(babylon protobuf::libprotobuf)
 if(TARGET Boost::boost)
   target_link_libraries(babylon Boost::boost)
 else()
