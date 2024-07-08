@@ -11,8 +11,8 @@ if(BUILD_DEPS)
   include(FetchContent)
   FetchContent_Declare(
     googletest
-    URL "https://github.com/google/googletest/archive/refs/tags/v1.12.1.tar.gz"
-    URL_HASH SHA256=8ad598c73ad796e0d8280b082cebd82a630d73e73cd3c70057938a6501bba5d7
+    URL "https://github.com/google/googletest/archive/refs/tags/release-1.12.1.tar.gz"
+    URL_HASH SHA256=81964fe578e9bd7c94dfdb09c8e4d6e6759e19967e397dbea48d1c10e45d0df2
   )
   if(BUILD_TESTING AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     FetchContent_MakeAvailable(googletest)
