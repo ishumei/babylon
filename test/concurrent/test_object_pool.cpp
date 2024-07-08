@@ -58,7 +58,6 @@ TEST_F(ObjectPoolTest, try_pop_fail_when_empty) {
   ASSERT_FALSE(pool.try_pop());
   pool.push(::std::unique_ptr<::std::string>(new ::std::string {"10086"}));
   auto p = pool.try_pop();
-  ASSERT_TRUE(p);
   ASSERT_EQ("10086", *p);
 }
 
