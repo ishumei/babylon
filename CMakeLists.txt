@@ -10,21 +10,17 @@ option(BUILD_DEPS "Use FetchContent download and build dependencies" OFF)
 if(BUILD_DEPS)
   include(FetchContent)
   FetchContent_Declare(
-    absl
-    URL "https://github.com/abseil/abseil-cpp/archive/refs/tags/20230125.1.tar.gz"
-    URL_HASH SHA256=81311c17599b3712069ded20cca09a62ab0bf2a89dfa16993786c8782b7ed145
-  )
-  FetchContent_Declare(
     googletest
-    URL "https://github.com/google/googletest/archive/refs/tags/v1.14.0.tar.gz"
+    URL "https://github.com/google/googletest/archive/refs/tags/v1.12.1.tar.gz"
     URL_HASH SHA256=8ad598c73ad796e0d8280b082cebd82a630d73e73cd3c70057938a6501bba5d7
   )
   if(BUILD_TESTING AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     FetchContent_MakeAvailable(googletest)
   endif()
-  set(ABSL_ENABLE_INSTALL ON)
-  FetchContent_MakeAvailable(absl)
 endif()
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++1y")
+add_subdirectory(third-party/abseil-cpp)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/babylon-deps.cmake)
 
