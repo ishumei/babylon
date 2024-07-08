@@ -20,6 +20,7 @@ if(BUILD_DEPS)
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++1y")
+set(ABSL_ENABLE_INSTALL ON)
 add_subdirectory(third-party/abseil-cpp)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/babylon-deps.cmake)
